@@ -1,0 +1,90 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct student{
+    int roll;
+    string name;
+};
+
+void insert(student a[], int *size)
+{
+    cout << "Enter the number of students : ";
+    cin >> *size;
+
+    for(int i = 0; i < *size; i++)
+    {
+        cout << "Enter " << i << "th student name and roll : ";
+        cin >> a[i].name >> a[i].roll;
+        // a++;  // remove this
+    }
+    cout << endl;
+}
+
+void del(student a[], int *size)
+{
+    if (*size <= 0) {
+        cout << "No students to delete.\n";
+        return;
+    }
+
+    cout << "Which position you want to delete ? (0 to " << (*size - 1) << "): ";
+    int pos;
+    cin >> pos;
+
+    if (pos < 0 || pos >= *size) {
+        cout << "Invalid position.\n";
+        return;
+    }
+
+    a[pos] = a[*size - 1]; // copy last element
+    (*size)--;
+}
+
+void display(student a[], int size)
+{
+    if (size <= 0) {
+        cout << "No students to display.\n";
+        return;
+    }
+
+    for(int i = 0; i < size; i++)
+        cout << "Student name is : " << a[i].name << ", and roll is " << a[i].roll << endl;
+}
+
+int main()
+{
+    student s[100];
+    int size = 0;
+
+    int choice;
+    do
+    {
+        cout << "Enter the choice (0=Insert, 1=Delete, 2=Display, 5=Exit): ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 0:
+                insert(s, &size);
+                break;
+
+            case 1:
+                del(s, &size);
+                break;
+
+            case 2:
+                display(s, size);
+                break;
+
+            case 5:
+                cout << "Exiting...\n";
+                break;
+
+            default:
+                cout << "Invalid choice. Provide 0, 1, 2, or 5\n";
+        }
+    } while(choice != 5);
+
+    return 0;
+}
