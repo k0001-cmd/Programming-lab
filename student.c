@@ -29,8 +29,8 @@ void display(student a[], int size) {
 int main() {
     student s[100];
 
-    int size;                 // <-- missing declaration/semicolon
-    insert(s, &size);        // <-- pass array as pointer + size
+    int size;                
+    insert(s, &size);        
     display(s, size);
 
     return 0;
